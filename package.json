@@ -1,0 +1,14 @@
+{
+  "name": "angularjs-geolocation",
+  "devDependencies": {
+    "karma": "~0.10",
+    "karma-jasmine": "~0.1",
+    "grunt": "~0.4.1",
+    "grunt-contrib-jshint": "~0.6.4",
+    "grunt-contrib-uglify": "~0.2.4",
+    "grunt-karma": "~0.6.2"
+  },
+  "scripts": {
+    "test": "./node_modules/.bin/karma start --single-run --browsers Chrome"
+  }
+}
