@@ -8,7 +8,7 @@ angular.module('geolocation',[]).constant('geolocation_msgs', {
 angular.module('geolocation')
   .factory('geolocation', ['$q','$rootScope','$window','geolocation_msgs',function ($q,$rootScope,$window,geolocation_msgs) {
     return {
-      getLocation: function () {
+      getLocation: function (opts) {
         var deferred = $q.defer();
         if ($window.navigator && $window.navigator.geolocation) {
           $window.navigator.geolocation.getCurrentPosition(function(position){
@@ -16,7 +16,7 @@ angular.module('geolocation')
           }, function(error) {
             $rootScope.$broadcast('error',geolocation_msgs['errors.location.notFound']);
             $rootScope.$apply(function(){deferred.reject(geolocation_msgs['errors.location.notFound']);});
-          });
+          }, opts);
         }
         else
         {
