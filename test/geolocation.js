@@ -41,18 +41,49 @@ describe('Service: geolocation', function () {
     $window.navigator = old_navigator;
   });
 
-  it('should not obtain user location', function () {
+  it('should not obtain user location due to rejected permission', function () {
     var results;
     spyOn($rootScope, '$broadcast');
     spyOn($window.navigator.geolocation,"getCurrentPosition").andCallFake(function() {
-        arguments[1]();
+        var error = {code: 1};
+        arguments[1](error);
     });
     geolocation.getLocation().then(function(){},function(error) {
       results = error;
     });
     $rootScope.$digest();
-    expect($rootScope.$broadcast).toHaveBeenCalledWith('error',geolocation_msgs['errors.location.notFound']);
-    expect(results).toEqual(geolocation_msgs['errors.location.notFound']);
+    expect($rootScope.$broadcast).toHaveBeenCalledWith('error',geolocation_msgs['errors.location.permissionDenied']);
+    expect(results).toEqual(geolocation_msgs['errors.location.permissionDenied']);
+  });
+
+  it('should not obtain user location if the network is down or the positioning satellites can’t be contacted', function () {
+    var results;
+    spyOn($rootScope, '$broadcast');
+    spyOn($window.navigator.geolocation,"getCurrentPosition").andCallFake(function() {
+        var error = {code: 2};
+        arguments[1](error);
+    });
+    geolocation.getLocation().then(function(){},function(error) {
+      results = error;
+    });
+    $rootScope.$digest();
+    expect($rootScope.$broadcast).toHaveBeenCalledWith('error',geolocation_msgs['errors.location.positionUnavailable']);
+    expect(results).toEqual(geolocation_msgs['errors.location.positionUnavailable']);
+  });
+
+  it('should not obtain user location if it takes too long to calculate the user’s position', function () {
+    var results;
+    spyOn($rootScope, '$broadcast');
+    spyOn($window.navigator.geolocation,"getCurrentPosition").andCallFake(function() {
+        var error = {code: 3};
+        arguments[1](error);
+    });
+    geolocation.getLocation().then(function(){},function(error) {
+      results = error;
+    });
+    $rootScope.$digest();
+    expect($rootScope.$broadcast).toHaveBeenCalledWith('error',geolocation_msgs['errors.location.timeout']);
+    expect(results).toEqual(geolocation_msgs['errors.location.timeout']);
   });
 
 });
