@@ -27,10 +27,10 @@ Usage
 Example
 --
 ```
-angular.module('myApp',['geolocation'])
-  .controller('mainCtrl', function ($scope,geolocation) {
-    $scope.coords = geolocation.getLocation().then(function(data){
-      return {lat:data.coords.latitude, long:data.coords.longitude};
+angular.module('barterApp',['geolocation'])
+  .controller('geoCtrl', function ($scope,geolocation) {
+    geolocation.getLocation().then(function(data){
+      $scope.coords = {lat:data.coords.latitude, long:data.coords.longitude};
     });
 });
 ```
