@@ -6,7 +6,7 @@
     "Arun Israel <arun.israel@gmail.com>"
   ],
   "description": "An angular.js wrapper around window.navigator.geolocation",
-  "main": "geolocation.js",
+  "main": "./src/geolocation.js",
   "keywords": [
     "geolocation",
     "angular.js"
