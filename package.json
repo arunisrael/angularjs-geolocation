@@ -1,5 +1,6 @@
 {
   "name": "angularjs-geolocation",
+  "version": "0.1.1",
   "devDependencies": {
     "karma": "~0.10",
     "karma-jasmine": "~0.1",
