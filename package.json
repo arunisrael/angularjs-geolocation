@@ -1,12 +1,25 @@
 {
   "name": "angularjs-geolocation",
+  "version": "0.1.1",
+  "description": "An angular.js wrapper around window.navigator.geolocation",
+  "main": "./src/geolocation.js",
+  "author": "Arun Israel <arun.israel@gmail.com>",
+  "license": "MIT",
+  "keywords": [
+    "geolocation",
+    "angular.js"
+  ],
   "devDependencies": {
     "karma": "~0.10",
     "karma-jasmine": "~0.1",
     "grunt": "~0.4.1",
     "grunt-contrib-jshint": "~0.6.4",
     "grunt-contrib-uglify": "~0.2.4",
-    "grunt-karma": "~0.6.2"
+    "grunt-karma": "~0.6.2",
+    "angular-mocks": "~1.x"
+  },
+  "dependencies": {
+    "angular": "~1.x"
   },
   "scripts": {
     "test": "./node_modules/.bin/karma start --single-run --browsers Chrome"
